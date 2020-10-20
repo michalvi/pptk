@@ -15,7 +15,7 @@ system_type = platform.system()
 license_text = b''
 with open('LICENSE', 'rb') as fd:
     license_text = license_text + fd.read()
-with open(os.path.join('licenses', 'LICENSE.append.txt'), 'rb') as fd:
+with open(os.path.join('licenses', f'LICENSE.{system_type.lower()}.txt'), 'rb') as fd:
     license_text = license_text + fd.read()
 with open(os.path.join('pptk', 'LICENSE'), 'wb') as fd:
     fd.write(license_text)
