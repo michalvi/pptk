@@ -6,9 +6,9 @@ import os.path
 import shutil
 import platform
 
-from pip._internal import wheel
+from pip._internal.utils.compatibility_tags import get_supported
 
-wheel_tags = wheel.pep425tags.get_supported()[0]
+wheel_tags = get_supported()[0]
 
 system_type = platform.system()
 
@@ -84,6 +84,10 @@ setup(
         'pptk.processing.estimate_normals': [make_mod('estimate_normals')],
         'pptk.vfuncs': [make_mod('vfuncs')],
         'pptk.viewer': [make_exe('viewer'), 'qt.conf']},
-    options={'bdist_wheel': {
-        'python_tag': wheel_tags[0],
-        'plat_name': wheel_tags[2]}})
+    options={
+        'bdist_wheel': {
+            'python_tag': wheel_tags.interpreter,
+            'plat_name': wheel_tags.platform,
+        }
+    }
+)
